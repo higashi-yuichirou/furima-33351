@@ -33,26 +33,28 @@
 | price            | integer    | null: false       |
 | user             | references | foreign_key: true |
 
-##adressesテーブル
+##addressesテーブル
 ###Association
-- has_one :purchase
+- belongs_to :purchase
 
-| Column         | Type       | Option      |
-| -------------- | ---------- | ----------- |
-| post_code      | string     | null: false |
-| area           | integer    | null: false |
-| city_number    | integer    | null: false |
-| city           | string     | null: false |
-| building_name  | string     |             |
-| phone_number   | integer    | null: false |
+| Column         | Type       | Option            |
+| -------------- | ---------- | ----------------- |
+| post_code      | string     | null: false       |
+| area           | integer    | null: false       |
+| city_number    | integer    | null: false       |
+| city           | string     | null: false       |
+| building_name  | string     |                   |
+| phone_number   | string     | null: false       |
+| purchase       | references | foreign_key: true |
 
 ##purchasesテーブル
 ###Association
 - belongs_to :user
-- has_one :list
-- has_one :adress
+- belongs_to :list
+- has_one :address
 
-| Column | Type       | Option                  |
-| ------ | ---------- | ----------------------- |
-| user   | references | foreign_key: true       |
-| list   | references | foreign_key: true       |
+| Column  | Type       | Option                  |
+| ------  | ---------- | ----------------------- |
+| user    | references | foreign_key: true       |
+| list    | references | foreign_key: true       |
+
