@@ -1,24 +1,47 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##usersテーブル
 
-Things you may want to cover:
+| Column          | Type    | Option      |
+| --------------- | ------- | ----------- |
+| email           | string  | null: false |
+| nickname        | string  | null: false |
+| password        | string  | null: false |
+| first_name      | string  | null: false |
+| last_name       | string  | null: false |
+| kana_first_name | string  | null: false |
+| kana_last_name  | string  | null: false |
+| birth_date      | integer | null: false |
 
-* Ruby version
+##listsテーブル
 
-* System dependencies
+| Column        | Type       | Option      |
+| ------------- | ---------- | ----------- |
+| name          | string     | null: false |
+| detail        | text       | null: false |
+| image         |            |             |
+| category      | integer    | null: false |
+| status        | integer    | null: false |
+| shipping_fee  | integer    | null: false |
+| location      | integer    | null: false |
+| shipping_date | integer    | null: false |
+| price         | integer    | null: false |
+| user          | references |             |
 
-* Configuration
+##adressesテーブル
 
-* Database creation
+| Column         | Type       | Option      |
+| -------------- | ---------- | ----------- |
+| post_code      | integer    | null: false |
+| area           | integer    | null: false |
+| city_number    | integer    | null: false |
+| city           | string     | null: false |
+| building_name  | string     | null: false |
+| phone_number   | integer    | null: false |
 
-* Database initialization
+##purchasesテーブル
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+| Column | Type       | Option |
+| ------ | ---------- | ------ |
+| user   | references |        |
+| list   | references |        |
