@@ -37,6 +37,16 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
+      it 'passwordが数字のみでは登録できないこと' do
+        @user.password = '1111111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
+      end
+      it 'psswordは全角文字では登録できないこと' do
+        @user.password = "あいうえおかきくけこ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
+      end
       it 'passwordに英字と数字の両方が含まれてないと登録できないこと' do
         @user.password = '0000000'
         @user.valid?

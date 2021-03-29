@@ -3,15 +3,22 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  validates :email, presence: true
-  validates :nickname, presence: true
-  validates :birth_date, presence: true
+  
+  with_options presence: true do
+    validates :email
+    validates :nickname
+    validates :last_name
+    validates :first_name
+    validates :kana_last_name
+    validates :kana_first_name
+    validates :birth_date
+  end
 
-  with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々一]+\z/, message: 'Full-width characters' } do
+  with_options format: { with: /\A[ぁ-んァ-ヶ一-龥々一]+\z/, message: 'Full-width characters' } do
     validates :last_name
     validates :first_name
   end
-  with_options presence: true, format: { with: /\A[ァ-ヶ]+\z/, message: 'Full-width characters' } do
+  with_options format: { with: /\A[ァ-ヶ]+\z/, message: 'Full-width characters' } do
     validates :kana_last_name
     validates :kana_first_name
   end
