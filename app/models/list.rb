@@ -30,5 +30,5 @@ class List < ApplicationRecord
 
   PRICE_REGEX = /\A[0-9]+\z/.freeze
   validates_format_of :price, with: PRICE_REGEX, message: 'Half-width number'
-  has_one :purchase
+  #has_one :purchase
 end
