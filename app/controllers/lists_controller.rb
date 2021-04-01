@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: :new
   def index
     @lists = List.all
   end

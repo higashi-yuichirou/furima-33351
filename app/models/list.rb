@@ -19,11 +19,15 @@ class List < ApplicationRecord
     validates :price
 
   end
-  validates :category_id, numericality: { other_than: 1 }
-  validates :status_id, numericality: { other_than: 1 }
-  validates :shipping_fee_id, numericality: { other_than: 1 }
-  validates :location_id, numericality: { other_than: 1 }
-  validates :shipping_date_id, numericality: { other_than: 1 }
-  validates_inclusion_of :price, in:300..9999999
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :status_id
+    validates :shipping_fee_id
+    validates :location_id
+    validates :shipping_date_id
+    validates_inclusion_of :price, in:300..9999999
+  end
+  PRICE_REGEX = /\A[0-9]+\z/.freeze
+  validates_format_of :price, with: PRICE_REGEX, message: 'Half-width number'
   has_one :purchase
 end
