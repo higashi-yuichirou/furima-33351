@@ -97,7 +97,6 @@ RSpec.describe List, type: :model do
       end
 
       it '販売価格が全角数字で入力された場合登録できないこと' do
-        #binding.pry
         @list.price = "１１１１１１"
         @list.valid?
         expect(@list.errors.full_messages).to include("Price is not included in the list")
