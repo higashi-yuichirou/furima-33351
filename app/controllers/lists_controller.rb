@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   def index
-    #@lists = List.all
+    @lists = List.order("created_at DESC")
   end
   def new
     @list = List.new
