@@ -1,11 +1,13 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   def index
-    @lists = List.order("created_at DESC")
+    @lists = List.order('created_at DESC')
   end
+
   def new
     @list = List.new
   end
+
   def create
     @list = List.new(list_params)
     if @list.save
@@ -15,8 +17,14 @@ class ListsController < ApplicationController
     end
   end
 
+  def show
+    @list = List.find(params[:id])
+  end
+
   private
+
   def list_params
-    params.require(:list).permit(:image, :name, :detail, :category_id, :status_id, :shipping_fee_id, :location_id, :shipping_date_id, :price).merge(user_id: current_user.id)
+    params.require(:list).permit(:image, :name, :detail, :category_id, :status_id, :shipping_fee_id, :location_id,
+                                 :shipping_date_id, :price).merge(user_id: current_user.id)
   end
 end

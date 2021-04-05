@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :list do           
+  factory :list do
     name              { Faker::Name.initials(number: 2) }
     detail            { Faker::Lorem.sentence }
     category_id       { 2 }
@@ -10,7 +10,7 @@ FactoryBot.define do
     price             { Faker::Number.number(digits: 6) }
     association :user
 
-    after(:build) do|list|
+    after(:build) do |list|
       list.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
     end
   end

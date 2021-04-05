@@ -38,9 +38,8 @@ RSpec.describe List, type: :model do
       it '商品のカテゴリーの選択が1の場合登録できないこと' do
         @list.category_id = 1
         @list.valid?
-        expect(@list.errors.full_messages).to include("Category must be other than 1")
+        expect(@list.errors.full_messages).to include('Category must be other than 1')
       end
-
 
       it '商品の状態を選択していないと登録できないこと' do
         @list.status_id = ''
@@ -51,7 +50,7 @@ RSpec.describe List, type: :model do
       it '商品の状態の選択が1の場合登録できないこと' do
         @list.status_id = 1
         @list.valid?
-        expect(@list.errors.full_messages).to include("Status must be other than 1")
+        expect(@list.errors.full_messages).to include('Status must be other than 1')
       end
 
       it '配送料の負担を選択していないと登録できないこと' do
@@ -63,9 +62,9 @@ RSpec.describe List, type: :model do
       it '配送料の負担の選択が1の場合登録できないこと' do
         @list.shipping_fee_id = 1
         @list.valid?
-        expect(@list.errors.full_messages).to include("Shipping fee must be other than 1")
+        expect(@list.errors.full_messages).to include('Shipping fee must be other than 1')
       end
-      
+
       it '発送元の地域を選択していないと登録できないこと' do
         @list.location_id = ''
         @list.valid?
@@ -75,7 +74,7 @@ RSpec.describe List, type: :model do
       it '発送元の地域の選択が1の場合登録できないこと' do
         @list.location_id = 1
         @list.valid?
-        expect(@list.errors.full_messages).to include("Location must be other than 1")
+        expect(@list.errors.full_messages).to include('Location must be other than 1')
       end
 
       it '発送までの日数を選択していないと登録できないこと' do
@@ -87,7 +86,7 @@ RSpec.describe List, type: :model do
       it '発送までの日数の選択が1の場合登録できないこと' do
         @list.shipping_date_id = 1
         @list.valid?
-        expect(@list.errors.full_messages).to include("Shipping date must be other than 1")
+        expect(@list.errors.full_messages).to include('Shipping date must be other than 1')
       end
 
       it '販売価格を入力していないと登録でいないこと' do
@@ -97,33 +96,33 @@ RSpec.describe List, type: :model do
       end
 
       it '販売価格が全角数字で入力された場合登録できないこと' do
-        @list.price = "１１１１１１"
+        @list.price = '１１１１１１'
         @list.valid?
-        expect(@list.errors.full_messages).to include("Price is not included in the list")
+        expect(@list.errors.full_messages).to include('Price is not included in the list')
       end
 
       it '販売価格が半角英数字混合では登録できないこと' do
-        @list.price = "aa222"
+        @list.price = 'aa222'
         @list.valid?
-        expect(@list.errors.full_messages).to include("Price is not included in the list")
+        expect(@list.errors.full_messages).to include('Price is not included in the list')
       end
 
       it '販売価格が半角英語では登録できないこと' do
-        @list.price = "aaaaaa"
+        @list.price = 'aaaaaa'
         @list.valid?
-        expect(@list.errors.full_messages).to include("Price is not included in the list")
+        expect(@list.errors.full_messages).to include('Price is not included in the list')
       end
 
       it '販売価格の値が300未満だったら登録できないこと' do
         @list.price = 299
         @list.valid?
-        expect(@list.errors.full_messages).to include("Price is not included in the list")
+        expect(@list.errors.full_messages).to include('Price is not included in the list')
       end
 
       it '販売価格の値が9999999以上だったら登録できないこと' do
-        @list.price = 10000000
+        @list.price = 10_000_000
         @list.valid?
-        expect(@list.errors.full_messages).to include("Price is not included in the list")
+        expect(@list.errors.full_messages).to include('Price is not included in the list')
       end
     end
   end
