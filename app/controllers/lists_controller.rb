@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:edit, :show]
-  before_action :authenticate_user!, only: [:new, :create]
-  before_action :move_to_index, only: :edit
+  before_action :set_list, only: [:edit, :show, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :move_to_index, only: [:edit, :update]
   def index
     @lists = List.order('created_at DESC')
   end
@@ -26,7 +26,6 @@ class ListsController < ApplicationController
   end
 
   def update
-    @list = List.find(params[:id])
     if @list.update(list_params)
       redirect_to root_path
     else
@@ -46,6 +45,6 @@ class ListsController < ApplicationController
   end
 
   def move_to_index
-    redirect_to action: :index unless user_signed_in? && current_user == @list.user
+    redirect_to action: :index unless current_user == @list.user
   end
 end
