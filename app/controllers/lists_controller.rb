@@ -1,5 +1,7 @@
 class ListsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :set_list, only: [:edit, :show, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :move_to_index, only: [:edit, :update]
   def index
     @lists = List.order('created_at DESC')
   end
@@ -18,7 +20,17 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = List.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    if @list.update(list_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
   private
@@ -26,5 +38,13 @@ class ListsController < ApplicationController
   def list_params
     params.require(:list).permit(:image, :name, :detail, :category_id, :status_id, :shipping_fee_id, :location_id,
                                  :shipping_date_id, :price).merge(user_id: current_user.id)
+  end
+
+  def set_list
+    @list = List.find(params[:id])
+  end
+
+  def move_to_index
+    redirect_to action: :index unless current_user == @list.user
   end
 end
