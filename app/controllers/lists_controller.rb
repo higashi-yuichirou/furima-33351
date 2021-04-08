@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:edit, :show, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
   def index
     @lists = List.order('created_at DESC')
