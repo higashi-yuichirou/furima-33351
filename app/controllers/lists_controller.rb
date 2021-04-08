@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:edit, :show, :update]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :move_to_index, only: [:edit, :update]
+  before_action :set_list, only: [:edit, :show, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :move_to_index, only: [:edit, :update, :destroy]
   def index
     @lists = List.order('created_at DESC')
   end
@@ -31,6 +31,11 @@ class ListsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @list.destroy
+    redirect_to root_path
   end
 
   private
