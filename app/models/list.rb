@@ -6,6 +6,7 @@ class List < ApplicationRecord
   belongs_to :location
   belongs_to :shipping_date
   belongs_to :user
+  has_one :purchase
   has_one_attached :image
   with_options presence: true do
     validates :image
