@@ -23,6 +23,9 @@ class ListsController < ApplicationController
   end
 
   def edit
+    if @list.purchase.present?
+      redirect_to root_path
+    end
   end
 
   def update
