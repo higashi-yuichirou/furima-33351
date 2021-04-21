@@ -7,12 +7,11 @@ class PurchaseAddress
     validates :city_number
     validates :city,         format: {with: /\A[ぁ-んァ-ヶー-龥々ー]+\z/, message: "is invalid. Input full-width characters"}
     validates :phone_number, format: {with: /\A\d{10,11}+\z/, message: "is invalid."}
-    validates :area,         numericality: {other_than: 0, message: "can't be blank"}
+    validates :area,         numericality: {other_than: 1, message: "must be other than 1"}
     validates :token
+    validates :user_id
+    validates :list_id
   end
-
-  #validates :phone_number, length: { maximum: 11, message: 'Too long' }
-  #validates :phone_number, numericality:
 
   def save
     purchase = Purchase.create(user_id: user_id, list_id: list_id)
